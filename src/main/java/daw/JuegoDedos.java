@@ -7,50 +7,63 @@ import javax.swing.JOptionPane;
 public class JuegoDedos {
 
     public static void main(String[] args) {
-
-        /*
-        Implementa un programa para jugar contra la máquina al juego de de dedos
-         */
+        
+        //Implementa un programa para jugar contra la máquina al juego de de dedos
         int opcion = 0;
         String jugador1 = "";
         String jugador2 = "";
         JOptionPane.showMessageDialog(null, "-BIENVENIDO AL JUEGO DE LOS DEDOS "
                 + "CHINOS-");
-        String menu = """
-                      Sabes las instrucciones?
-                      En caso de no saberlas introduca 1 (no).
-                      Si ya las sabes introduzca una 2 (si) para proceder a jugar
-                      Si deseas salir, introduce 3
-                      """;
-
+        String opcionS;
+        opcionS = showMenu();
+       
         do {
-            String opcionS = JOptionPane.showInputDialog(menu);
+            
             if (opcionS == null) {
-                JOptionPane.showInputDialog("Por favor, introduce una opcion valida");
-                continue;
+                opcionS = JOptionPane.showInputDialog("Por favor, introduce una opcion valida");
             }
 
             try {
                 opcion = Integer.parseInt(opcionS);
                 switch (opcion) {
-                    case 1 ->
+                    case 1 -> {
                         mostrarInstrucciones();
+                        opcionS = showMenu();
+                    }
 
-                    case 2 ->
+                    case 2 -> {
                         jugarDedosChinos(0, 0, 0, 0);
+                        opcionS = showMenu();
+                    }
 
-                    case 3 ->
+                    case 3 -> {
                         salidaPantalla();
+                    }
 
                     default ->
-                        JOptionPane.showInputDialog(null, "Por favor introduzca una "
+                        opcionS = JOptionPane.showInputDialog(null, "Por favor introduzca una "
                                 + "opción válida");
                 }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showInputDialog(null, "Por favor, introduce un "
+                opcionS = JOptionPane.showInputDialog(null, "Por favor, introduce un "
                         + "numero valido");
+                   
             }
         } while (opcion != 3);
+    }
+    
+    public static String showMenu () {
+         String menu = """
+                      Sabes las instrucciones?
+                      En caso de no saberlas introduca 1 (no).
+                      Si ya las sabes introduzca una 2 (si) para proceder a jugar
+                      Si deseas salir, introduce 3
+                      """;
+        String entrada;
+        
+        entrada =  JOptionPane.showInputDialog(menu);
+        
+        return entrada;
     }
 
     public static void mostrarInstrucciones() {
